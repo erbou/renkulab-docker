@@ -51,7 +51,9 @@ USER $NB_USER
 # install jupyterlab, papermill, git extension and renku-jupyterlab-ts
 COPY requirements.txt /tmp/requirements.txt
 RUN python3 -m pip install --no-cache-dir -U pip && \
+    pip3 install virtualenv && \
     python3 -m pip install --no-cache-dir -r /tmp/requirements.txt && \
+    python3 -m pip install powerline-shell && \
     # jupyter lab build && \
     # jupyter labextension list && \
     # npm cache clean --force && \
