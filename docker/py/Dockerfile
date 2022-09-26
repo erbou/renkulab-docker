@@ -9,7 +9,7 @@ SHELL [ "/bin/bash", "-c", "-o", "pipefail" ]
 
 # Install additional dependencies and nice-to-have packages
 RUN apt-get update && \
-    apt-get install -yq --no-install-recommends software-properties-common -y && \
+    apt-get install software-properties-common -y && \
     add-apt-repository 'ppa:deadsnakes/ppa' && \
     apt-get install -yq --no-install-recommends \
     build-essential \
@@ -51,7 +51,9 @@ USER $NB_USER
 # install jupyterlab, papermill, git extension and renku-jupyterlab-ts
 COPY requirements.txt /tmp/requirements.txt
 RUN python3 -m pip install --no-cache-dir -U pip && \
+    pip3 install virtualenv && \
     python3 -m pip install --no-cache-dir -r /tmp/requirements.txt && \
+    python3 -m pip install powerline-shell && \
     # jupyter lab build && \
     # jupyter labextension list && \
     # npm cache clean --force && \
